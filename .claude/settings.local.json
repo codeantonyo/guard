@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "PowerShell($env:Path = \"C:\\\\Program Files\\\\nodejs;$env:Path\"; npm run dev 2>&1 | Tee-Object -FilePath \"$env:TEMP\\\\guard-dev.log\")",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}

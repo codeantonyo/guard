@@ -1,0 +1,11 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M20 2.5 L33.5 7.2 V19.3 C33.5 27.8 27.7 33.9 20 37.5 C12.3 33.9 6.5 27.8 6.5 19.3 V7.2 Z" fill="url(#guardGrad)"/>
+  <path d="M20 2.5 L33.5 7.2 V19.3 C33.5 27.8 27.7 33.9 20 37.5 C12.3 33.9 6.5 27.8 6.5 19.3 V7.2 Z" stroke="#39e07a" stroke-width="0.6" stroke-opacity="0.5"/>
+  <text x="20" y="26.5" font-family="'Bebas Neue', Impact, sans-serif" font-size="19" font-weight="700" fill="#ffffff" text-anchor="middle">G</text>
+  <defs>
+    <linearGradient id="guardGrad" x1="6.5" y1="2.5" x2="33.5" y2="37.5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1DB954"/>
+      <stop offset="1" stop-color="#0d6b30"/>
+    </linearGradient>
+  </defs>
+</svg>
