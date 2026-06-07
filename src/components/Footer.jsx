@@ -1,4 +1,6 @@
-const quickLinks = ['Services', 'Films', 'Gallery', 'Process', 'Contact']
+import { useLocale } from '../i18n/LocaleProvider'
+
+const navKeys = ['services', 'films', 'gallery', 'process', 'contact']
 
 function ShieldLogo() {
   return (
@@ -16,63 +18,50 @@ function ShieldLogo() {
 }
 
 export default function Footer() {
-  const scrollTo = (id) => document.querySelector(`#${id.toLowerCase()}`)?.scrollIntoView({ behavior: 'smooth' })
+  const { t } = useLocale()
+  const scrollTo = (id) => document.querySelector(`#${id}`)?.scrollIntoView({ behavior: 'smooth' })
+
+  const linkStyle = { fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--c-text-3)', textDecoration: 'none', transition: 'color 0.2s ease' }
+  const headingStyle = { fontFamily: 'var(--font-heading)', fontSize: '13px', fontWeight: 700, color: 'var(--c-text)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '20px' }
 
   return (
-    <footer style={{ background: 'var(--color-bg-primary)', borderTop: '1px solid rgba(29,185,84,0.15)', padding: '64px 48px 32px' }}>
+    <footer style={{ background: 'var(--color-bg-primary)', borderTop: '1px solid rgba(29,185,84,0.15)', padding: '64px 48px 28px' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        {/* Top section */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '64px', marginBottom: '64px' }} className="footer-grid">
-          {/* Brand */}
+        {/* Top */}
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '64px', marginBottom: '56px' }} className="footer-grid">
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
               <ShieldLogo />
               <div>
-                <div style={{ fontFamily: 'Bebas Neue', fontSize: '22px', letterSpacing: '0.1em', color: '#fff', lineHeight: 1 }}>Guard Film</div>
-                <div style={{ fontFamily: 'Inter', fontSize: '9px', letterSpacing: '0.3em', color: '#1DB954', textTransform: 'uppercase' }}>Make a Difference</div>
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '0.1em', color: 'var(--c-text)', lineHeight: 1 }}>Guard Film</div>
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: '9px', letterSpacing: '0.3em', color: '#1DB954', textTransform: 'uppercase' }}>{t('brand.tagline')}</div>
               </div>
             </div>
-            <p style={{ fontFamily: 'Inter', fontSize: '14px', color: 'rgba(255,255,255,0.35)', lineHeight: 1.8, maxWidth: '320px' }}>
-              Moldova's premier Paint Protection Film and car wrap studio. We protect what you drive — with precision, passion, and premium materials.
-            </p>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--c-text-3)', lineHeight: 1.8, maxWidth: '320px' }}>{t('footer.blurb')}</p>
           </div>
 
-          {/* Quick links */}
           <div>
-            <div style={{ fontFamily: 'Syne', fontSize: '13px', fontWeight: 700, color: '#fff', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '20px' }}>Navigation</div>
+            <div style={headingStyle}>{t('footer.navTitle')}</div>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {quickLinks.map((link) => (
-                <li key={link}>
-                  <a
-                    href={`#${link.toLowerCase()}`}
-                    onClick={(e) => { e.preventDefault(); scrollTo(link) }}
-                    style={{ fontFamily: 'Inter', fontSize: '14px', color: 'rgba(255,255,255,0.4)', textDecoration: 'none', transition: 'color 0.2s ease' }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = '#1DB954')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}
-                  >
-                    {link}
+              {navKeys.map((key) => (
+                <li key={key}>
+                  <a href={`#${key}`} onClick={(e) => { e.preventDefault(); scrollTo(key) }} style={linkStyle} onMouseEnter={(e) => (e.currentTarget.style.color = '#1DB954')} onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-text-3)')}>
+                    {t(`nav.${key}`)}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact summary */}
           <div>
-            <div style={{ fontFamily: 'Syne', fontSize: '13px', fontWeight: 700, color: '#fff', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '20px' }}>Contact</div>
+            <div style={headingStyle}>{t('footer.contactTitle')}</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {[
                 { label: '+373 XXX XXX XXX', href: 'tel:+373XXXXXXXXX' },
                 { label: 'info@guardfilm.md', href: 'mailto:info@guardfilm.md' },
                 { label: 'Chișinău, Moldova', href: '#' },
               ].map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  style={{ fontFamily: 'Inter', fontSize: '14px', color: 'rgba(255,255,255,0.4)', textDecoration: 'none', transition: 'color 0.2s ease' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#1DB954')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}
-                >
+                <a key={item.label} href={item.href} style={linkStyle} onMouseEnter={(e) => (e.currentTarget.style.color = '#1DB954')} onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-text-3)')}>
                   {item.label}
                 </a>
               ))}
@@ -82,10 +71,31 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
-          <div style={{ fontFamily: 'Inter', fontSize: '12px', color: 'rgba(255,255,255,0.2)' }}>
-            © {new Date().getFullYear()} Guard Film. All rights reserved. Chișinău, Moldova.
+          <div style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--c-text-faint)' }}>
+            © {new Date().getFullYear()} Guard Film. {t('footer.rights')}
           </div>
-          <div style={{ fontFamily: 'Inter', fontSize: '12px', color: 'rgba(255,255,255,0.15)' }}>Premium PPF &amp; Vinyl Wrap</div>
+          <div style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--c-text-faint)' }}>{t('footer.premium')}</div>
+        </div>
+
+        {/* Watermark */}
+        <div style={{ marginTop: '24px', textAlign: 'center' }}>
+          <a
+            href="https://webmake.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '8px 16px', borderRadius: '999px',
+              border: '1px solid var(--color-border)', background: 'var(--color-bg-card)', textDecoration: 'none',
+              fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--c-text-3)', letterSpacing: '0.04em',
+              transition: 'all 0.25s ease',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--color-green-border)'; e.currentTarget.style.color = 'var(--c-text)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--color-border)'; e.currentTarget.style.color = 'var(--c-text-3)' }}
+          >
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#1DB954', boxShadow: '0 0 8px #1DB954' }} />
+            {t('footer.developedBy')}{' '}
+            <strong style={{ fontWeight: 700, letterSpacing: '0.08em', background: 'linear-gradient(90deg,#1DB954,#39e07a)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>WEBMAKE.DEV</strong>
+          </a>
         </div>
       </div>
     </footer>

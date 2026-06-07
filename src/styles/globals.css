@@ -15,18 +15,59 @@
   --color-green-border: rgba(29, 185, 84, 0.3);
 
   --color-text-primary: #ffffff;
-  --color-text-secondary: #a0a0a0;
-  --color-text-muted: #555555;
+  --color-text-secondary: rgba(255, 255, 255, 0.6);
+  --color-text-muted: rgba(255, 255, 255, 0.4);
 
   --color-border: rgba(255, 255, 255, 0.06);
   --color-border-hover: rgba(255, 255, 255, 0.12);
 
-  --font-display: 'Bebas Neue', cursive;
-  --font-heading: 'Syne', sans-serif;
+  /* Semantic text tokens (theme-aware) */
+  --c-text: #ffffff;
+  --c-text-2: rgba(255, 255, 255, 0.6);
+  --c-text-3: rgba(255, 255, 255, 0.4);
+  --c-text-faint: rgba(255, 255, 255, 0.25);
+  --c-hairline: rgba(255, 255, 255, 0.1);
+  --c-glass: rgba(8, 8, 8, 0.82);
+  --c-swatch-ring: rgba(255, 255, 255, 0.12);
+
+  /* Cyrillic-safe font stacks: Bebas Neue & Syne lack Cyrillic glyphs, so RU
+     falls back to Oswald (condensed, Cyrillic) / Inter (Cyrillic). */
+  --font-display: 'Bebas Neue', 'Oswald', sans-serif;
+  --font-heading: 'Syne', 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
 
   --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
   --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  color-scheme: dark;
+}
+
+/* ─────────────── Light theme ─────────────── */
+[data-theme='light'] {
+  --color-bg-primary: #f3f4f1;
+  --color-bg-secondary: #ffffff;
+  --color-bg-card: #ffffff;
+  --color-bg-elevated: #eef0ec;
+
+  --color-green-glow: rgba(29, 185, 84, 0.12);
+  --color-green-border: rgba(29, 185, 84, 0.4);
+
+  --color-text-primary: #0b0d0c;
+  --color-text-secondary: rgba(18, 22, 20, 0.66);
+  --color-text-muted: rgba(18, 22, 20, 0.45);
+
+  --color-border: rgba(0, 0, 0, 0.09);
+  --color-border-hover: rgba(0, 0, 0, 0.16);
+
+  --c-text: #0b0d0c;
+  --c-text-2: rgba(18, 22, 20, 0.66);
+  --c-text-3: rgba(18, 22, 20, 0.5);
+  --c-text-faint: rgba(18, 22, 20, 0.38);
+  --c-hairline: rgba(0, 0, 0, 0.1);
+  --c-glass: rgba(255, 255, 255, 0.85);
+  --c-swatch-ring: rgba(0, 0, 0, 0.12);
+
+  color-scheme: light;
 }
 
 /* ---------- Lenis smooth scroll ----------
@@ -40,12 +81,14 @@ html.lenis body { height: auto; }
 .lenis.lenis-stopped { overflow: hidden; }
 .lenis.lenis-smooth iframe { pointer-events: none; }
 
+html { background: var(--color-bg-primary); }
 body {
   font-family: var(--font-body);
   background: var(--color-bg-primary);
   color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 a { color: inherit; }
@@ -87,7 +130,7 @@ a { color: inherit; }
 
 .btn-ghost {
   background: transparent;
-  color: #fff;
+  color: var(--c-text);
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 14px;

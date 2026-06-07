@@ -1,13 +1,11 @@
-import { Suspense, useEffect, useMemo, useRef, Component } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Environment, useGLTF, ContactShadows, Float } from '@react-three/drei'
+import { Suspense, useEffect, useMemo, Component } from 'react'
+import { Canvas, useThree } from '@react-three/fiber'
+import { OrbitControls, Environment, useGLTF, ContactShadows } from '@react-three/drei'
 import { gsap } from 'gsap'
 import * as THREE from 'three'
+import { cars, defaultCar } from '../data/cars'
 
-const MODEL = '/car-model/car.glb'
-
-// Material parameters per film finish — this is what makes a matte film actually
-// look matte and a chrome film actually look chrome on the 3D car.
+// Material parameters per film finish — makes matte look matte, chrome look chrome.
 const FINISH = {
   gloss: { metalness: 0.45, roughness: 0.12, clearcoat: 1.0, clearcoatRoughness: 0.06, envMapIntensity: 1.5, iridescence: 0 },
   matte: { metalness: 0.0, roughness: 0.88, clearcoat: 0.0, clearcoatRoughness: 0.6, envMapIntensity: 0.45, iridescence: 0 },
@@ -16,99 +14,102 @@ const FINISH = {
   colorshift: { metalness: 0.75, roughness: 0.16, clearcoat: 1.0, clearcoatRoughness: 0.08, envMapIntensity: 1.7, iridescence: 1 },
 }
 
-function CarModel({ selectedFilm }) {
-  const { scene } = useGLTF(MODEL)
-  const paintMatsRef = useRef([])
+// Prepare (clone + recolor-prep + auto-fit) each model once, then cache it so
+// switching back to a model is instant.
+const prepCache = new Map()
+function getPrepared(scene, car) {
+  if (prepCache.has(car.id)) return prepCache.get(car.id)
 
-  // Clone, recolor-prep and auto-fit the model once per loaded scene.
-  const { model, groundY, radius } = useMemo(() => {
-    const root = scene.clone(true)
-    const paints = []
+  const root = scene.clone(true)
+  const re = new RegExp(car.paint.match, 'i')
+  const paintMat = new THREE.MeshPhysicalMaterial({
+    color: new THREE.Color('#0a0a0a'),
+    metalness: FINISH.gloss.metalness,
+    roughness: FINISH.gloss.roughness,
+    clearcoat: FINISH.gloss.clearcoat,
+    clearcoatRoughness: FINISH.gloss.clearcoatRoughness,
+    envMapIntensity: FINISH.gloss.envMapIntensity,
+  })
+  paintMat.name = 'GuardPaint'
 
-    root.traverse((o) => {
-      if (o.isMesh) {
-        o.castShadow = false
-        o.receiveShadow = false
-        // Swap the car's body-paint material for a fully controllable one.
-        if (o.material && /paint/i.test(o.material.name || '')) {
-          const pm = new THREE.MeshPhysicalMaterial({
-            color: new THREE.Color(selectedFilm?.hex || '#0a0a0a'),
-            metalness: FINISH.gloss.metalness,
-            roughness: FINISH.gloss.roughness,
-            clearcoat: FINISH.gloss.clearcoat,
-            clearcoatRoughness: FINISH.gloss.clearcoatRoughness,
-            envMapIntensity: FINISH.gloss.envMapIntensity,
-          })
-          pm.name = 'GuardPaint'
-          o.material = pm
-          paints.push(pm)
-        }
-      }
-    })
+  root.traverse((o) => {
+    if (!o.isMesh) return
+    o.castShadow = false
+    o.receiveShadow = false
+    const hit = car.paint.by === 'mesh' ? re.test(o.name || '') : re.test(o.material?.name || '')
+    if (hit) o.material = paintMat
+  })
 
-    // Fit to a ~4.4-unit box centered at the origin.
-    const box = new THREE.Box3().setFromObject(root)
-    const size = box.getSize(new THREE.Vector3())
-    const center = box.getCenter(new THREE.Vector3())
-    const maxDim = Math.max(size.x, size.y, size.z) || 1
-    const scale = 4.4 / maxDim
-    root.scale.setScalar(scale)
-    root.position.set(-center.x * scale, -center.y * scale, -center.z * scale)
+  // Fit to a ~4.4-unit box centered at the origin.
+  const box = new THREE.Box3().setFromObject(root)
+  const size = box.getSize(new THREE.Vector3())
+  const center = box.getCenter(new THREE.Vector3())
+  const maxDim = Math.max(size.x, size.y, size.z) || 1
+  const scale = 4.4 / maxDim
+  root.scale.setScalar(scale)
+  root.position.set(-center.x * scale, -center.y * scale, -center.z * scale)
 
-    paintMatsRef.current = paints
-    return {
-      model: root,
-      groundY: -(size.y * scale) / 2,
-      radius: (Math.max(size.x, size.z) * scale) / 2,
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scene])
+  const prepared = { root, paintMat, groundY: -(size.y * scale) / 2, radius: (Math.max(size.x, size.z) * scale) / 2 }
+  prepCache.set(car.id, prepared)
+  return prepared
+}
 
-  // Animate paint color + finish whenever the selected film changes.
+function CarModel({ car, selectedFilm, onReady }) {
+  const { scene } = useGLTF(car.file)
+  const invalidate = useThree((s) => s.invalidate)
+  const { root, paintMat, groundY, radius } = useMemo(() => getPrepared(scene, car), [scene, car])
+
+  // Animate paint colour + finish whenever the selected film changes.
   useEffect(() => {
     if (!selectedFilm) return
     const target = FINISH[selectedFilm.finish] || FINISH.gloss
     const color = new THREE.Color(selectedFilm.hex)
 
-    paintMatsRef.current.forEach((m) => {
-      // Iridescence toggles a shader feature — set it directly (with recompile)
-      // rather than animating across the 0 boundary.
-      const wantIrid = target.iridescence ? 0.7 : 0
-      if ((m.iridescence > 0) !== (wantIrid > 0)) {
-        m.iridescence = wantIrid
-        if (wantIrid) {
-          m.iridescenceIOR = 1.8
-          m.iridescenceThicknessRange = [120, 480]
-        }
-        m.needsUpdate = true
-      } else {
-        m.iridescence = wantIrid
+    const wantIrid = target.iridescence ? 0.7 : 0
+    if ((paintMat.iridescence > 0) !== (wantIrid > 0)) {
+      paintMat.iridescence = wantIrid
+      if (wantIrid) {
+        paintMat.iridescenceIOR = 1.8
+        paintMat.iridescenceThicknessRange = [120, 480]
       }
+      paintMat.needsUpdate = true
+    } else {
+      paintMat.iridescence = wantIrid
+    }
 
-      gsap.to(m.color, { r: color.r, g: color.g, b: color.b, duration: 0.7, ease: 'power2.out' })
-      gsap.to(m, {
-        metalness: target.metalness,
-        roughness: target.roughness,
-        clearcoat: target.clearcoat,
-        clearcoatRoughness: target.clearcoatRoughness,
-        envMapIntensity: target.envMapIntensity,
-        duration: 0.7,
-        ease: 'power2.out',
-      })
+    const t1 = gsap.to(paintMat.color, { r: color.r, g: color.g, b: color.b, duration: 0.7, ease: 'power2.out', onUpdate: invalidate })
+    const t2 = gsap.to(paintMat, {
+      metalness: target.metalness,
+      roughness: target.roughness,
+      clearcoat: target.clearcoat,
+      clearcoatRoughness: target.clearcoatRoughness,
+      envMapIntensity: target.envMapIntensity,
+      duration: 0.7,
+      ease: 'power2.out',
+      onUpdate: invalidate,
     })
-  }, [selectedFilm])
+    return () => { t1.kill(); t2.kill() }
+  }, [selectedFilm, paintMat, invalidate])
+
+  // Signal that this model is mounted (fires after Suspense resolves).
+  useEffect(() => { onReady?.(car.id) }, [car.id, onReady])
 
   return (
     <>
-      <Float speed={1} rotationIntensity={0.12} floatIntensity={0.25}>
-        <primitive object={model} />
-      </Float>
+      <primitive object={root} />
       <ContactShadows position={[0, groundY, 0]} opacity={0.5} scale={Math.max(8, radius * 4)} blur={2.6} far={4} resolution={1024} color="#000000" />
     </>
   )
 }
 
-// Keep a model load failure from hanging the Suspense fallback forever.
+// Render-on-demand controller: when the scene is idle (paused / off-screen) we
+// stop the render loop and only draw when something actually changes.
+function Rig({ active, paused, selectedFilm, carId }) {
+  const invalidate = useThree((s) => s.invalidate)
+  useEffect(() => { invalidate() }, [active, paused, selectedFilm, carId, invalidate])
+  return null
+}
+
 class CanvasErrorBoundary extends Component {
   constructor(props) {
     super(props)
@@ -118,65 +119,77 @@ class CanvasErrorBoundary extends Component {
     return { failed: true }
   }
   render() {
-    if (this.state.failed) return this.props.fallback
-    return this.props.children
+    return this.state.failed ? this.props.fallback : this.props.children
   }
 }
 
-export default function CarViewer({ selectedFilm }) {
+export default function CarViewer({ car = defaultCar, selectedFilm, paused = false, active = true, hint = 'DRAG TO ROTATE · SCROLL TO ZOOM', onReady }) {
+  const live = active && !paused
   const fallback = (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', minHeight: '420px', textAlign: 'center', padding: '24px' }}>
       <div>
-        <div style={{ fontFamily: 'Bebas Neue', fontSize: '28px', color: '#1DB954' }}>3D viewer unavailable</div>
-        <div style={{ fontFamily: 'Inter', fontSize: '13px', color: 'rgba(255,255,255,0.4)', marginTop: '8px' }}>
-          Could not load the car model. Pick a finish from the swatches →
-        </div>
+        <div style={{ fontFamily: 'var(--font-display)', fontSize: '28px', color: '#1DB954' }}>3D viewer unavailable</div>
+        <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--c-text-3)', marginTop: '8px' }}>Pick a finish from the swatches →</div>
       </div>
     </div>
   )
 
   return (
-    // data-lenis-prevent: stop Lenis from hijacking wheel events over the canvas,
-    // so scroll-to-zoom on the car no longer scrolls the page.
+    // data-lenis-prevent: stop Lenis hijacking wheel events so scroll-to-zoom
+    // on the car doesn't scroll the page.
     <div data-lenis-prevent style={{ width: '100%', height: '100%', position: 'relative' }}>
       <CanvasErrorBoundary fallback={fallback}>
-        <Canvas camera={{ position: [4.6, 1.6, 6.2], fov: 38 }} gl={{ antialias: true, alpha: true }} style={{ background: 'transparent' }} dpr={[1, 2]}>
+        <Canvas
+          camera={{ position: [4.6, 1.6, 6.2], fov: 38 }}
+          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+          style={{ background: 'transparent' }}
+          dpr={[1, 1.75]}
+          frameloop={live ? 'always' : 'demand'}
+        >
           <Suspense fallback={null}>
             <ambientLight intensity={0.45} />
             <directionalLight position={[5, 8, 3]} intensity={1.4} />
             <directionalLight position={[-5, 2, -3]} intensity={0.5} color="#1DB954" />
             <pointLight position={[0, 4, 0]} intensity={0.4} />
 
-            <CarModel selectedFilm={selectedFilm} />
+            <CarModel car={car} selectedFilm={selectedFilm} onReady={onReady} />
 
             <Environment preset="city" />
 
             <OrbitControls
+              makeDefault
               enablePan={false}
+              enableDamping
               minDistance={3.5}
               maxDistance={12}
               minPolarAngle={Math.PI / 6}
               maxPolarAngle={Math.PI / 2.05}
-              autoRotate
+              autoRotate={live}
               autoRotateSpeed={0.5}
               target={[0, 0, 0]}
             />
+            <Rig active={active} paused={paused} selectedFilm={selectedFilm} carId={car.id} />
           </Suspense>
         </Canvas>
       </CanvasErrorBoundary>
 
-      {/* Instructions overlay */}
       <div
         style={{
           position: 'absolute', bottom: '16px', left: '50%', transform: 'translateX(-50%)',
-          fontFamily: 'Inter', fontSize: '11px', color: 'rgba(255,255,255,0.3)',
+          fontFamily: 'var(--font-body)', fontSize: '11px', color: 'var(--c-text-faint)',
           letterSpacing: '0.1em', whiteSpace: 'nowrap', pointerEvents: 'none',
         }}
       >
-        DRAG TO ROTATE · SCROLL TO ZOOM
+        {hint}
       </div>
     </div>
   )
 }
 
-useGLTF.preload(MODEL)
+// Preload the default car so it's ready by the time the showcase mounts.
+useGLTF.preload(defaultCar.file)
+// Hover-prefetch helper for the other models (download only, no parse).
+export function prefetchCar(id) {
+  const car = cars.find((c) => c.id === id)
+  if (car) useGLTF.preload(car.file)
+}

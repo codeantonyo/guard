@@ -24,4 +24,8 @@ dist-ssr
 *.sw?
 
 # Build/inspect helpers
-_inspect-glb.mjs
+_*.mjs
+
+# Source car models live in /public/car-model — keep the root-level duplicates
+# (the originals you dropped in) out of git so the deploy stays lean.
+/*.glb

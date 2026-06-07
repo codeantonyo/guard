@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Sun, Moon, Languages, Check } from 'lucide-react'
+import { useTheme } from '../theme/ThemeProvider'
+import { useLocale, SUPPORTED_LOCALES } from '../i18n/LocaleProvider'
 
-const navLinks = [
-  { label: 'Services', href: '#services' },
-  { label: 'Films', href: '#films' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'Process', href: '#process' },
-  { label: 'Contact', href: '#contact' },
+const navItems = [
+  { key: 'services', href: '#services' },
+  { key: 'films', href: '#films' },
+  { key: 'gallery', href: '#gallery' },
+  { key: 'process', href: '#process' },
+  { key: 'contact', href: '#contact' },
 ]
 
 function ShieldLogo({ size = 40, gradId = 'navGuardGrad' }) {
@@ -25,7 +28,89 @@ function ShieldLogo({ size = 40, gradId = 'navGuardGrad' }) {
   )
 }
 
+function LangSwitcher({ compact }) {
+  const { locale, setLocale } = useLocale()
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (!open) return
+    const onDown = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false) }
+    document.addEventListener('mousedown', onDown)
+    return () => document.removeEventListener('mousedown', onDown)
+  }, [open])
+
+  return (
+    <div ref={ref} style={{ position: 'relative' }}>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        aria-label="Language"
+        style={{
+          display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 12px', borderRadius: '6px',
+          background: 'transparent', border: '1px solid var(--color-border)', color: 'var(--c-text-2)',
+          cursor: 'pointer', fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 600, letterSpacing: '0.05em',
+        }}
+      >
+        <Languages size={15} />
+        {locale.toUpperCase()}
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.15 }}
+            style={{
+              position: 'absolute', top: 'calc(100% + 8px)', [compact ? 'left' : 'right']: 0, minWidth: '150px',
+              background: 'var(--color-bg-card)', border: '1px solid var(--color-border)', borderRadius: '8px',
+              padding: '6px', zIndex: 50, boxShadow: '0 16px 40px rgba(0,0,0,0.4)',
+            }}
+          >
+            {SUPPORTED_LOCALES.map((l) => (
+              <button
+                key={l.code}
+                onClick={() => { setLocale(l.code); setOpen(false) }}
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', width: '100%',
+                  padding: '9px 12px', borderRadius: '6px', border: 'none', cursor: 'pointer',
+                  background: locale === l.code ? 'rgba(29,185,84,0.1)' : 'transparent',
+                  color: locale === l.code ? '#39e07a' : 'var(--c-text-2)',
+                  fontFamily: 'var(--font-body)', fontSize: '13px', textAlign: 'left',
+                }}
+              >
+                <span><strong>{l.label}</strong> · {l.name}</span>
+                {locale === l.code && <Check size={14} />}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme()
+  const { t } = useLocale()
+  return (
+    <button
+      onClick={toggleTheme}
+      aria-label={theme === 'dark' ? t('theme.light') : t('theme.dark')}
+      title={theme === 'dark' ? t('theme.light') : t('theme.dark')}
+      style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'center', width: '38px', height: '38px',
+        borderRadius: '6px', background: 'transparent', border: '1px solid var(--color-border)',
+        color: 'var(--c-text-2)', cursor: 'pointer',
+      }}
+    >
+      {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+    </button>
+  )
+}
+
 export default function Navbar() {
+  const { t } = useLocale()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -49,64 +134,55 @@ export default function Navbar() {
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
           padding: scrolled ? '12px 48px' : '20px 48px',
-          background: scrolled ? 'rgba(8,8,8,0.95)' : 'transparent',
+          background: scrolled ? 'var(--c-glass)' : 'transparent',
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
+          borderBottom: `1px solid ${scrolled ? 'var(--color-border)' : 'transparent'}`,
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           transition: 'all 0.4s ease',
         }}
       >
         {/* Logo */}
-        <a
-          href="#"
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-          style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}
-        >
+        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }} style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
           <ShieldLogo size={40} gradId="navGuardGrad" />
           <div>
-            <div style={{ fontFamily: 'Bebas Neue', fontSize: '20px', letterSpacing: '0.1em', color: '#fff', lineHeight: 1 }}>Guard Film</div>
-            <div style={{ fontFamily: 'Inter', fontSize: '9px', letterSpacing: '0.3em', color: '#1DB954', textTransform: 'uppercase' }}>Make a Difference</div>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '0.1em', color: 'var(--c-text)', lineHeight: 1 }}>Guard Film</div>
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: '9px', letterSpacing: '0.3em', color: '#1DB954', textTransform: 'uppercase' }}>{t('brand.tagline')}</div>
           </div>
         </a>
 
         {/* Desktop Nav */}
-        <div style={{ display: 'flex', gap: '36px', alignItems: 'center' }} className="desktop-nav">
-          {navLinks.map((link) => (
+        <div style={{ display: 'flex', gap: '28px', alignItems: 'center' }} className="desktop-nav">
+          {navItems.map((link) => (
             <a
-              key={link.label}
+              key={link.key}
               href={link.href}
               onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
-              style={{
-                fontFamily: 'Inter', fontSize: '13px', fontWeight: 500,
-                letterSpacing: '0.08em', textTransform: 'uppercase',
-                color: 'rgba(255,255,255,0.7)', textDecoration: 'none',
-                transition: 'color 0.2s ease', position: 'relative',
-              }}
+              style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--c-text-2)', textDecoration: 'none', transition: 'color 0.2s ease' }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#1DB954')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-text-2)')}
             >
-              {link.label}
+              {t(`nav.${link.key}`)}
             </a>
           ))}
+          <LangSwitcher />
+          <ThemeToggle />
           <button className="btn-primary" onClick={() => scrollTo('#contact')} style={{ fontSize: '12px', padding: '10px 24px' }}>
-            Get a Quote
+            {t('nav.getQuote')}
           </button>
         </div>
 
-        {/* Mobile Hamburger */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }}
-          className="hamburger-btn"
-          aria-label="Toggle menu"
-        >
-          <div style={{ width: '24px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
-            <motion.span animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7 : 0 }} style={{ display: 'block', height: '2px', background: '#fff', borderRadius: '1px' }} />
-            <motion.span animate={{ opacity: menuOpen ? 0 : 1 }} style={{ display: 'block', height: '2px', background: '#fff', borderRadius: '1px' }} />
-            <motion.span animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -7 : 0 }} style={{ display: 'block', height: '2px', background: '#fff', borderRadius: '1px' }} />
-          </div>
-        </button>
+        {/* Mobile controls */}
+        <div style={{ display: 'none', alignItems: 'center', gap: '10px' }} className="hamburger-btn">
+          <ThemeToggle />
+          <button onClick={() => setMenuOpen(!menuOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }} aria-label="Toggle menu">
+            <div style={{ width: '24px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
+              <motion.span animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7 : 0 }} style={{ display: 'block', height: '2px', background: 'var(--c-text)', borderRadius: '1px' }} />
+              <motion.span animate={{ opacity: menuOpen ? 0 : 1 }} style={{ display: 'block', height: '2px', background: 'var(--c-text)', borderRadius: '1px' }} />
+              <motion.span animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -7 : 0 }} style={{ display: 'block', height: '2px', background: 'var(--c-text)', borderRadius: '1px' }} />
+            </div>
+          </button>
+        </div>
       </motion.nav>
 
       {/* Mobile Full-Screen Menu */}
@@ -116,35 +192,26 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            style={{
-              position: 'fixed', inset: 0, zIndex: 999,
-              background: 'rgba(8,8,8,0.98)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '32px',
-            }}
+            style={{ position: 'fixed', inset: 0, zIndex: 999, background: 'var(--color-bg-primary)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '28px' }}
           >
-            {navLinks.map((link, i) => (
+            {navItems.map((link, i) => (
               <motion.a
-                key={link.label}
+                key={link.key}
                 href={link.href}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08 }}
                 onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
-                style={{ fontFamily: 'Bebas Neue', fontSize: '48px', letterSpacing: '0.05em', color: '#fff', textDecoration: 'none' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#1DB954')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = '#fff')}
+                style={{ fontFamily: 'var(--font-display)', fontSize: '44px', letterSpacing: '0.05em', color: 'var(--c-text)', textDecoration: 'none' }}
               >
-                {link.label}
+                {t(`nav.${link.key}`)}
               </motion.a>
             ))}
-            <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="btn-primary"
-              onClick={() => scrollTo('#contact')}
-            >
-              Get a Quote
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.36 }}>
+              <LangSwitcher compact />
+            </motion.div>
+            <motion.button initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.44 }} className="btn-primary" onClick={() => scrollTo('#contact')}>
+              {t('nav.getQuote')}
             </motion.button>
           </motion.div>
         )}

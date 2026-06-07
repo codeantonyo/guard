@@ -12,14 +12,16 @@
   <title>Guard Film — Make a Difference</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { background: #080808; color: #fff; overflow-x: hidden; }
-    body { cursor: none; }
+    html { background: #080808; overflow-x: hidden; }
+    html[data-theme="light"] { background: #f3f4f1; }
+    body { color: #fff; overflow-x: hidden; cursor: none; }
+    html[data-theme="light"] body { color: #0b0d0c; }
     ::selection { background: rgba(29,185,84,0.3); color: #fff; }
     ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #080808; }
+    ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #1DB954; border-radius: 2px; }
     /* Restore native cursor on touch devices */
     @media (pointer: coarse) {
@@ -27,6 +29,21 @@
       #cursor-dot, #cursor-ring { display: none !important; }
     }
   </style>
+  <script>
+    // Apply saved theme/language before first paint to avoid a flash.
+    (function () {
+      try {
+        var m = document.cookie.match(/(?:^|; )gf_theme=([^;]+)/);
+        var t = m ? decodeURIComponent(m[1]) : null;
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        document.documentElement.dataset.theme = t;
+        var l = document.cookie.match(/(?:^|; )gf_lang=([^;]+)/);
+        if (l) document.documentElement.lang = decodeURIComponent(l[1]);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <div id="root"></div>
