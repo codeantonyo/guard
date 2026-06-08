@@ -189,6 +189,81 @@ select option { background: #141414; color: #fff; }
 /* ---------- Keyframes ---------- */
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ---------- Swatch list scrollbar ---------- */
+.swatch-scroll::-webkit-scrollbar { width: 5px; }
+.swatch-scroll::-webkit-scrollbar-track { background: transparent; }
+.swatch-scroll::-webkit-scrollbar-thumb { background: var(--color-border-hover); border-radius: 3px; }
+.swatch-scroll::-webkit-scrollbar-thumb:hover { background: var(--color-green-primary); }
+.swatch-scroll { scrollbar-width: thin; scrollbar-color: var(--color-border-hover) transparent; }
+
+/* ---------- PPF structure (3D exploded layers) ---------- */
+.ppf-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  margin-top: 56px;
+}
+.ppf-stage {
+  position: relative;
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1500px;
+  perspective-origin: 50% 42%;
+}
+.ppf-float {
+  transform-style: preserve-3d;
+  animation: ppfFloat 6s ease-in-out infinite;
+}
+.ppf-deck {
+  position: relative;
+  width: 340px;
+  height: 212px;
+  transform-style: preserve-3d;
+  transform: rotateX(56deg) rotateZ(-42deg);
+}
+.ppf-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 26px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease, box-shadow 0.35s ease;
+  cursor: pointer;
+}
+.ppf-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, transparent 45%);
+  pointer-events: none;
+}
+@keyframes ppfFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.ppf-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ppf-float { animation: none; }
+}
+@media (max-width: 900px) {
+  .ppf-wrap { grid-template-columns: 1fr; gap: 16px; }
+  .ppf-stage { height: 360px; }
+  .ppf-deck { transform: rotateX(56deg) rotateZ(-42deg) scale(0.78); }
+}
+@media (max-width: 480px) {
+  .ppf-deck { transform: rotateX(54deg) rotateZ(-40deg) scale(0.6); }
+}
+
 /* ---------- Testimonials marquee ---------- */
 @keyframes marquee {
   from { transform: translateX(0); }

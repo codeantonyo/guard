@@ -162,7 +162,7 @@ export default function FilmPicker() {
 
           {/* Swatches */}
           <AnimatePresence mode="wait">
-            <motion.div key={activeCategory} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px' }}>
+            <motion.div className="swatch-scroll" key={activeCategory} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', maxHeight: '232px', overflowY: 'auto', overflowX: 'hidden', paddingRight: '4px' }}>
               {currentCategory.films.map((film) => (
                 <div
                   key={film.id}

@@ -10,6 +10,7 @@ import FilmPicker from './components/FilmPicker'
 import BeforeAfter from './components/BeforeAfter'
 import Process from './components/Process'
 import WhyUs from './components/WhyUs'
+import FilmStructure from './components/FilmStructure'
 import Testimonials from './components/Testimonials'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -94,6 +95,7 @@ export default function App() {
           <BeforeAfter />
           <Process />
           <WhyUs />
+          <FilmStructure />
           <Testimonials />
           <Contact />
         </main>

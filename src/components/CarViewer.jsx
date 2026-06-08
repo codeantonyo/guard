@@ -11,6 +11,7 @@ const FINISH = {
   matte: { metalness: 0.0, roughness: 0.88, clearcoat: 0.0, clearcoatRoughness: 0.6, envMapIntensity: 0.45, iridescence: 0 },
   satin: { metalness: 0.2, roughness: 0.42, clearcoat: 0.45, clearcoatRoughness: 0.32, envMapIntensity: 0.9, iridescence: 0 },
   chrome: { metalness: 1.0, roughness: 0.045, clearcoat: 1.0, clearcoatRoughness: 0.03, envMapIntensity: 2.2, iridescence: 0 },
+  metallic: { metalness: 0.9, roughness: 0.28, clearcoat: 0.85, clearcoatRoughness: 0.18, envMapIntensity: 1.6, iridescence: 0 },
   colorshift: { metalness: 0.75, roughness: 0.16, clearcoat: 1.0, clearcoatRoughness: 0.08, envMapIntensity: 1.7, iridescence: 1 },
 }
 
