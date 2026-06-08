@@ -189,6 +189,77 @@ select option { background: #141414; color: #fff; }
 /* ---------- Keyframes ---------- */
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ---------- Floating contact buttons ---------- */
+.fab-stack {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 950;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-end;
+}
+.fab {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s var(--transition-smooth), box-shadow 0.25s ease;
+}
+.fab-main { width: 58px; height: 58px; }
+.fab:hover { transform: scale(1.1); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45); }
+.fab-label {
+  position: absolute;
+  right: calc(100% + 12px);
+  white-space: nowrap;
+  background: var(--color-bg-card);
+  color: var(--c-text);
+  border: 1px solid var(--color-border);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+.fab:hover .fab-label { opacity: 1; transform: translateX(0); }
+.fab-pulse::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--fab-color, #25D366);
+  z-index: -1;
+  animation: fabPulse 2.2s ease-out infinite;
+}
+@keyframes fabPulse {
+  0% { transform: scale(1); opacity: 0.55; }
+  70% { transform: scale(1.7); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fab-pulse::before { animation: none; }
+}
+@media (max-width: 600px) {
+  .fab-stack { right: 16px; bottom: 16px; gap: 12px; }
+  .fab { width: 48px; height: 48px; }
+  .fab-label { display: none; }
+}
+
 /* ---------- Swatch list scrollbar ---------- */
 .swatch-scroll::-webkit-scrollbar { width: 5px; }
 .swatch-scroll::-webkit-scrollbar-track { background: transparent; }

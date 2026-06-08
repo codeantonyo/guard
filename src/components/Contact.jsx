@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import toast, { Toaster } from 'react-hot-toast'
 import { Phone, Mail, MapPin, Clock, CircleCheckBig } from 'lucide-react'
-import { filmCategories } from '../data/films'
 import { useLocale } from '../i18n/LocaleProvider'
 
 // ─────────────────────────────────────────────────────────────
@@ -36,11 +35,9 @@ const FacebookIcon = ({ size = 20 }) => (
   </svg>
 )
 
-const allFilms = filmCategories.flatMap((c) => c.films.map((f) => f.name))
-
 export default function Contact() {
   const { t } = useLocale()
-  const [form, setForm] = useState({ name: '', phone: '', email: '', car: '', service: '', film: '', message: '' })
+  const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' })
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
   const { ref } = useInView({ triggerOnce: true, threshold: 0.1 })
@@ -62,7 +59,6 @@ export default function Contact() {
   const focusOn = (e) => (e.target.style.borderColor = '#1DB954')
   const focusOff = (e) => (e.target.style.borderColor = 'var(--color-border)')
 
-  const serviceOptions = t('contact.serviceOptions')
   const details = [
     { Icon: Phone, label: t('contact.phoneLabel'), value: COMPANY_INFO.phone, href: `tel:${COMPANY_INFO.phone}` },
     { Icon: Mail, label: t('contact.emailLabel'), value: COMPANY_INFO.email, href: `mailto:${COMPANY_INFO.email}` },
@@ -105,41 +101,14 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }} className="form-row">
-                  <div>
-                    <label style={labelStyle}>{t('contact.email')}</label>
-                    <input name="email" type="email" value={form.email} onChange={handleChange} placeholder={t('contact.emailPh')} style={inputStyle} onFocus={focusOn} onBlur={focusOff} />
-                  </div>
-                  <div>
-                    <label style={labelStyle}>{t('contact.car')}</label>
-                    <input name="car" value={form.car} onChange={handleChange} placeholder={t('contact.carPh')} style={inputStyle} onFocus={focusOn} onBlur={focusOff} />
-                  </div>
-                </div>
-
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }} className="form-row">
-                  <div>
-                    <label style={labelStyle}>{t('contact.service')}</label>
-                    <select name="service" value={form.service} onChange={handleChange} style={{ ...inputStyle, appearance: 'none' }} onFocus={focusOn} onBlur={focusOff}>
-                      <option value="">{t('contact.servicePh')}</option>
-                      {(Array.isArray(serviceOptions) ? serviceOptions : []).map((s) => (
-                        <option key={s} value={s}>{s}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label style={labelStyle}>{t('contact.film')}</label>
-                    <input id="film-color-input" name="film" value={form.film} onChange={handleChange} list="film-list" placeholder={t('contact.filmPh')} style={inputStyle} onFocus={focusOn} onBlur={focusOff} />
-                    <datalist id="film-list">
-                      {allFilms.map((f) => (
-                        <option key={f} value={f} />
-                      ))}
-                    </datalist>
-                  </div>
+                <div>
+                  <label style={labelStyle}>{t('contact.email')}</label>
+                  <input name="email" type="email" value={form.email} onChange={handleChange} placeholder={t('contact.emailPh')} style={inputStyle} onFocus={focusOn} onBlur={focusOff} />
                 </div>
 
                 <div>
                   <label style={labelStyle}>{t('contact.message')}</label>
-                  <textarea name="message" value={form.message} onChange={handleChange} rows={5} placeholder={t('contact.messagePh')} style={{ ...inputStyle, resize: 'vertical', minHeight: '120px' }} onFocus={focusOn} onBlur={focusOff} />
+                  <textarea id="contact-message" name="message" value={form.message} onChange={handleChange} rows={5} placeholder={t('contact.messagePh')} style={{ ...inputStyle, resize: 'vertical', minHeight: '120px' }} onFocus={focusOn} onBlur={focusOff} />
                 </div>
 
                 <button type="submit" className="btn-primary" disabled={sending} style={{ fontSize: '14px', padding: '16px', opacity: sending ? 0.7 : 1, cursor: sending ? 'wait' : 'pointer' }}>

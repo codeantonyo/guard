@@ -14,6 +14,7 @@ import FilmStructure from './components/FilmStructure'
 import Testimonials from './components/Testimonials'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import FloatingContact from './components/FloatingContact'
 
 export default function App() {
   useEffect(() => {
@@ -100,6 +101,7 @@ export default function App() {
           <Contact />
         </main>
         <Footer />
+        <FloatingContact />
       </LocaleProvider>
     </ThemeProvider>
   )

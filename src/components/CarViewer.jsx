@@ -15,12 +15,11 @@ const FINISH = {
   colorshift: { metalness: 0.75, roughness: 0.16, clearcoat: 1.0, clearcoatRoughness: 0.08, envMapIntensity: 1.7, iridescence: 1 },
 }
 
-// Prepare (clone + recolor-prep + auto-fit) each model once, then cache it so
-// switching back to a model is instant.
-const prepCache = new Map()
+// Clone + recolor-prep + auto-fit a model. We clone fresh on each car switch — a
+// cheap operation versus the GLTF parse, which useGLTF caches — so R3F always gets
+// a fresh, attachable object. (Reusing one cached object3D across <primitive>
+// swaps leaves it detached, so the model silently fails to re-render.)
 function getPrepared(scene, car) {
-  if (prepCache.has(car.id)) return prepCache.get(car.id)
-
   const root = scene.clone(true)
   const re = new RegExp(car.paint.match, 'i')
   const paintMat = new THREE.MeshPhysicalMaterial({
@@ -50,9 +49,7 @@ function getPrepared(scene, car) {
   root.scale.setScalar(scale)
   root.position.set(-center.x * scale, -center.y * scale, -center.z * scale)
 
-  const prepared = { root, paintMat, groundY: -(size.y * scale) / 2, radius: (Math.max(size.x, size.z) * scale) / 2 }
-  prepCache.set(car.id, prepared)
-  return prepared
+  return { root, paintMat, groundY: -(size.y * scale) / 2, radius: (Math.max(size.x, size.z) * scale) / 2 }
 }
 
 function CarModel({ car, selectedFilm, onReady }) {
@@ -97,7 +94,10 @@ function CarModel({ car, selectedFilm, onReady }) {
 
   return (
     <>
-      <primitive object={root} />
+      {/* dispose={null}: models are cached & reused across car switches, so let R3F
+          detach (not dispose) them — otherwise the shared geometry is freed and the
+          Audi RS7 fails to re-render when you switch back to it. */}
+      <primitive object={root} dispose={null} />
       <ContactShadows position={[0, groundY, 0]} opacity={0.5} scale={Math.max(8, radius * 4)} blur={2.6} far={4} resolution={1024} color="#000000" />
     </>
   )

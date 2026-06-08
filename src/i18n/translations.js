@@ -48,6 +48,7 @@ export const translations = {
       pause: 'Pause',
       resume: 'Rotate',
       switching: 'Loading model…',
+      requestMessage: "I'm interested in this film:",
     },
     gallery: {
       label: 'Transformations',
@@ -176,6 +177,7 @@ export const translations = {
       pause: 'Pauză',
       resume: 'Rotire',
       switching: 'Se încarcă modelul…',
+      requestMessage: 'Sunt interesat de această folie:',
     },
     gallery: {
       label: 'Transformări',
@@ -304,6 +306,7 @@ export const translations = {
       pause: 'Пауза',
       resume: 'Вращать',
       switching: 'Загрузка модели…',
+      requestMessage: 'Меня интересует эта плёнка:',
     },
     gallery: {
       label: 'Трансформации',

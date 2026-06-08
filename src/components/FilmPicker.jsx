@@ -43,11 +43,12 @@ export default function FilmPicker() {
     if (!contactSection) return
     contactSection.scrollIntoView({ behavior: 'smooth' })
     setTimeout(() => {
-      const input = document.getElementById('film-color-input')
-      if (!input) return
-      const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set
-      setter?.call(input, selectedFilm.name)
-      input.dispatchEvent(new Event('input', { bubbles: true }))
+      const el = document.getElementById('contact-message')
+      if (!el) return
+      const setter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value')?.set
+      setter?.call(el, `${t('films.requestMessage')} ${selectedFilm.name} — ${selectedCar.name}.`)
+      el.dispatchEvent(new Event('input', { bubbles: true }))
+      el.focus()
     }, 800)
   }
 
