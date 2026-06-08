@@ -126,6 +126,9 @@ class CanvasErrorBoundary extends Component {
 
 export default function CarViewer({ car = defaultCar, selectedFilm, paused = false, active = true, hint = 'DRAG TO ROTATE · SCROLL TO ZOOM', onReady }) {
   const live = active && !paused
+  // Frame the (wide) car so it fits comfortably in a tall phone viewport.
+  const portrait = typeof window !== 'undefined' && window.innerWidth < 768
+  const camera = portrait ? { position: [5.0, 1.5, 6.9], fov: 42 } : { position: [4.6, 1.6, 6.2], fov: 38 }
   const fallback = (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', minHeight: '420px', textAlign: 'center', padding: '24px' }}>
       <div>
@@ -141,7 +144,7 @@ export default function CarViewer({ car = defaultCar, selectedFilm, paused = fal
     <div data-lenis-prevent style={{ width: '100%', height: '100%', position: 'relative' }}>
       <CanvasErrorBoundary fallback={fallback}>
         <Canvas
-          camera={{ position: [4.6, 1.6, 6.2], fov: 38 }}
+          camera={camera}
           gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
           style={{ background: 'transparent' }}
           dpr={[1, 1.75]}

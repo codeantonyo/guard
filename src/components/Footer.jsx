@@ -57,7 +57,7 @@ export default function Footer() {
             <div style={headingStyle}>{t('footer.contactTitle')}</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {[
-                { label: '+373 XXX XXX XXX', href: 'tel:+373XXXXXXXXX' },
+                { label: '+373 697 27 151', href: 'tel:+37369727151' },
                 { label: 'info@guardfilm.md', href: 'mailto:info@guardfilm.md' },
                 { label: 'Chișinău, Moldova', href: '#' },
               ].map((item) => (

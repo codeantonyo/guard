@@ -386,9 +386,13 @@ select option { background: #141414; color: #fff; }
 
 /* Film picker */
 @media (max-width: 900px) {
-  .film-picker-layout { grid-template-columns: 1fr !important; }
+  /* minmax(0,1fr) + min-width:0 lets the single column shrink to the viewport
+     instead of being forced wide by its content (which caused the panel to
+     overflow off-screen on phones). */
+  .film-picker-layout { grid-template-columns: minmax(0, 1fr) !important; }
+  .film-picker-layout > div { min-width: 0 !important; }
   .film-picker-layout > div:first-child {
-    min-height: 380px !important;
+    min-height: 420px !important;
     border-right: none !important;
     border-bottom: 1px solid var(--color-border) !important;
   }
@@ -424,7 +428,23 @@ select option { background: #141414; color: #fff; }
   .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
 }
 
-/* Global mobile side padding relief */
+/* ============================================================
+   Mobile polish (≤640px)
+   ============================================================ */
 @media (max-width: 640px) {
-  section { padding-left: 24px !important; padding-right: 24px !important; }
+  /* Consistent, comfortable side gutters everywhere */
+  section { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Hero: tighter, full-width symmetric CTAs */
+  .hero-content { padding-left: 0 !important; padding-right: 0 !important; padding-top: 92px !important; }
+  .hero-cta { flex-direction: column !important; align-items: stretch !important; width: 100%; gap: 12px !important; }
+  .hero-cta > button { width: 100% !important; }
+  .hero-scroll { display: none !important; }
+
+  /* Drop the doubled inner gutter on full-bleed section headers */
+  .films-header, .testimonials-header { padding-left: 0 !important; padding-right: 0 !important; }
+
+  /* Viewer overlay chips sit closer to the edges on small screens */
+  .viewer-chip-tl { top: 14px !important; left: 14px !important; }
+  .viewer-chip-tr { top: 14px !important; right: 14px !important; }
 }

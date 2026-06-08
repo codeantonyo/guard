@@ -7,13 +7,13 @@ import { useLocale } from '../i18n/LocaleProvider'
 // ─────────────────────────────────────────────────────────────
 // TODO: Replace these with real company details
 const COMPANY_INFO = {
-  phone: '+373 XXX XXX XXX', // TODO
+  phone: '+373 697 27 151', // TODO
   email: 'info@guardfilm.md', // TODO
-  address: 'Str. Calea Ieșilor 10, Chișinău, Moldova', // TODO
+  address: 'Str. Meșterul Manole 9, Chișinău, Moldova', // TODO
   maps_url: 'https://www.google.com/maps/search/?api=1&query=47.01512761256857,28.88808696971555',
-  instagram: 'https://instagram.com/guardfilm', // TODO
-  tiktok: 'https://tiktok.com/@guardfilm', // TODO
-  facebook: 'https://facebook.com/guardfilm', // TODO
+  instagram: 'https://www.instagram.com/friends_detailing.md/', // TODO
+  tiktok: 'https://tiktok.com/', // TODO
+  facebook: 'https://www.facebook.com/friendsdetailing.md/', // TODO
 }
 const MAPS_EMBED_SRC =
   'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1130.7930754943636!2d28.88808696971555!3d47.01512761256857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c97b7ac5f86a2f%3A0xfd79cbc0a95649d3!2sFriends%20Detailing!5e1!3m2!1sen!2s!4v1780849238335!5m2!1sen!2s'

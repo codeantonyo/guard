@@ -54,7 +54,7 @@ export default function FilmPicker() {
 
   return (
     <section id="films" ref={ref} style={{ padding: '120px 0', background: 'var(--color-bg-primary)', overflow: 'hidden' }}>
-      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 48px' }}>
+      <div className="films-header" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 48px' }}>
         <div style={{ marginBottom: '64px' }}>
           <div className="section-label">{t('films.label')}</div>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(48px, 7vw, 96px)', color: 'var(--c-text)', lineHeight: 0.95 }}>
@@ -71,7 +71,7 @@ export default function FilmPicker() {
         {/* LEFT: 3D Car Viewer */}
         <div style={{ position: 'relative', background: 'radial-gradient(ellipse at center, color-mix(in srgb, var(--color-green-primary) 8%, var(--color-bg-primary)) 0%, var(--color-bg-primary) 70%)', borderRight: '1px solid var(--color-border)', minHeight: '560px' }}>
           {/* Selected film info overlay */}
-          <div style={{ position: 'absolute', top: '24px', left: '32px', zIndex: 10 }}>
+          <div className="viewer-chip-tl" style={{ position: 'absolute', top: '24px', left: '32px', zIndex: 10 }}>
             <div style={{ background: 'var(--c-glass)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid var(--color-border)', borderRadius: '8px', padding: '16px 20px', display: 'flex', alignItems: 'center', gap: '14px' }}>
               <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: selectedFilm.hex, border: '2px solid var(--c-swatch-ring)', flexShrink: 0 }} />
               <div>
@@ -83,6 +83,7 @@ export default function FilmPicker() {
 
           {/* Pause / rotate toggle */}
           <button
+            className="viewer-chip-tr"
             onClick={() => setPaused((p) => !p)}
             aria-label={paused ? t('films.resume') : t('films.pause')}
             style={{

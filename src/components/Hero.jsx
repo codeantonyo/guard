@@ -74,7 +74,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div style={{ position: 'relative', zIndex: 3, width: '100%', maxWidth: '1400px', margin: '0 auto', padding: '0 48px', paddingTop: '100px' }}>
+      <div className="hero-content" style={{ position: 'relative', zIndex: 3, width: '100%', maxWidth: '1400px', margin: '0 auto', padding: '0 48px', paddingTop: '100px' }}>
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }} className="section-label" style={{ marginBottom: '24px' }}>
           {t('hero.badge')}
         </motion.div>
@@ -84,7 +84,7 @@ export default function Hero() {
             {(Array.isArray(words) ? words : []).map((word, i) => {
               const isLast = i === words.length - 1
               return (
-                <motion.span key={`${word}-${i}`} custom={i} variants={wordVariants} initial="hidden" animate="visible" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(64px, 11vw, 140px)', lineHeight: 0.95, letterSpacing: '0.02em', color: 'var(--c-text)', display: 'block' }}>
+                <motion.span key={`${word}-${i}`} custom={i} variants={wordVariants} initial="hidden" animate="visible" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(46px, 13vw, 140px)', lineHeight: 0.95, letterSpacing: '0.02em', color: 'var(--c-text)', display: 'block' }}>
                   {isLast ? <span style={{ color: 'transparent', WebkitTextStroke: '1px rgba(29,185,84,0.8)' }}>{word}</span> : word}
                 </motion.span>
               )
@@ -96,7 +96,7 @@ export default function Hero() {
           {t('hero.subtitle')}
         </motion.p>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.1 }} style={{ display: 'flex', gap: '16px', marginTop: '40px', flexWrap: 'wrap' }}>
+        <motion.div className="hero-cta" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.1 }} style={{ display: 'flex', gap: '16px', marginTop: '40px', flexWrap: 'wrap' }}>
           <button className="btn-primary" onClick={() => document.querySelector('#films')?.scrollIntoView({ behavior: 'smooth' })}>{t('hero.exploreFilms')}</button>
           <button className="btn-ghost" onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}>{t('hero.bookConsultation')}</button>
         </motion.div>
@@ -112,7 +112,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }} style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+      <motion.div className="hero-scroll" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }} style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
         <span style={{ fontFamily: 'var(--font-body)', fontSize: '10px', letterSpacing: '0.2em', color: 'var(--c-text-faint)', textTransform: 'uppercase' }}>{t('hero.scroll')}</span>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.5 }} style={{ width: '1px', height: '32px', background: 'linear-gradient(to bottom, rgba(29,185,84,0.8), transparent)' }} />
       </motion.div>

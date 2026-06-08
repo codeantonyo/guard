@@ -30,7 +30,7 @@ export default function Testimonials() {
   const { t } = useLocale()
   return (
     <section style={{ padding: '120px 0', background: 'var(--color-bg-primary)', overflow: 'hidden' }}>
-      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 48px', marginBottom: '56px' }}>
+      <div className="testimonials-header" style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 48px', marginBottom: '56px' }}>
         <div className="section-label">{t('testimonials.label')}</div>
         <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(48px, 7vw, 96px)', color: 'var(--c-text)', lineHeight: 0.95 }}>{t('testimonials.title')}</h2>
       </div>
