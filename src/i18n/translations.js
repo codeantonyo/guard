@@ -13,7 +13,7 @@ export const translations = {
       subtitle: 'Premium Paint Protection Film and vinyl wrap installation. Invisible armor for your vehicle — engineered to last.',
       exploreFilms: 'Explore Films',
       bookConsultation: 'Book a Consultation',
-      badges: ['500+ Cars Protected', 'Self-Healing Film', '10-Year Warranty'],
+      badges: ['500+ Cars Protected', 'Self-Healing Film', '5-Year Warranty'],
       scroll: 'Scroll',
     },
     stats: {
@@ -28,7 +28,7 @@ export const translations = {
       ctaText: 'Not sure which service is right for you?',
       ctaButton: 'Talk to an Expert',
       items: [
-        { title: 'Paint Protection Film', desc: 'Self-healing, optically clear film that guards against stone chips, scratches, UV damage, and chemical etching. Available in matte and glossy finishes.', features: ['Self-healing technology', 'UV protection', 'Preserves resale value', '10-year warranty available'] },
+        { title: 'Paint Protection Film', desc: 'Self-healing, optically clear film that guards against stone chips, scratches, UV damage, and chemical etching. Available in matte and glossy finishes.', features: ['Self-healing technology', 'UV protection', 'Preserves resale value', '5-year warranty available'] },
         { title: 'Vinyl Color Wrap', desc: 'Transform your vehicle with premium vinyl wraps. Over 300 colors, textures, and finishes available. Fully reversible — returns to original paint.', features: ['300+ colors & finishes', 'Fully reversible', 'Protects original paint', 'Custom designs available'] },
         { title: 'Ceramic Coating', desc: 'Professional nano-ceramic coating that bonds permanently to your paint. Creates a hydrophobic shield with extreme gloss and chemical resistance.', features: ['9H hardness rating', 'Hydrophobic surface', 'Extreme gloss finish', '5-year protection'] },
         { title: 'Window Tinting', desc: 'Professional window film installation for superior UV rejection, heat reduction, enhanced privacy, and a sleek refined look.', features: ['99% UV rejection', 'Heat reduction', 'Privacy enhancement', 'Legal compliance guaranteed'] },
@@ -77,7 +77,7 @@ export const translations = {
       story: 'Our Story →',
       features: [
         { title: 'Self-Healing Technology', desc: 'Our PPF films use thermoplastic polyurethane that heals light scratches with heat exposure — your paint stays flawless.' },
-        { title: '10-Year Warranty Available', desc: 'We stand behind our work. Selected films come with a decade of manufacturer warranty against yellowing, cracking, and delamination.' },
+        { title: '5-Year Warranty Available', desc: 'We stand behind our work. Selected films come with a decade of manufacturer warranty against yellowing, cracking, and delamination.' },
         { title: 'Certified Installers', desc: "Our team is trained and certified by the world's leading film manufacturers including XPEL, Avery Dennison, and Hexis." },
         { title: 'Climate-Controlled Studio', desc: 'Film installation requires a dust-free, temperature-regulated environment. Our studio is built to professional standards.' },
         { title: '15+ Premium Film Brands', desc: 'We partner directly with top manufacturers to stock the widest film catalog in Moldova — including rare and specialty finishes.' },
@@ -142,7 +142,7 @@ export const translations = {
       subtitle: 'Instalare premium de folie de protecție a vopselei și folie colorată. Armură invizibilă pentru mașina ta — făcută să dureze.',
       exploreFilms: 'Explorează Foliile',
       bookConsultation: 'Programează o Consultație',
-      badges: ['500+ Mașini Protejate', 'Folie Auto-regenerantă', 'Garanție 10 Ani'],
+      badges: ['500+ Mașini Protejate', 'Folie Auto-regenerantă', 'Garanție 5 Ani'],
       scroll: 'Derulează',
     },
     stats: {
@@ -157,7 +157,7 @@ export const translations = {
       ctaText: 'Nu ești sigur ce serviciu ți se potrivește?',
       ctaButton: 'Vorbește cu un Expert',
       items: [
-        { title: 'Folie de Protecție a Vopselei', desc: 'Folie auto-regenerantă, optic transparentă, care protejează împotriva pietrelor, zgârieturilor, razelor UV și a agenților chimici. Disponibilă în finisaj mat și lucios.', features: ['Tehnologie auto-regenerantă', 'Protecție UV', 'Păstrează valoarea la revânzare', 'Garanție de 10 ani disponibilă'] },
+        { title: 'Folie de Protecție a Vopselei', desc: 'Folie auto-regenerantă, optic transparentă, care protejează împotriva pietrelor, zgârieturilor, razelor UV și a agenților chimici. Disponibilă în finisaj mat și lucios.', features: ['Tehnologie auto-regenerantă', 'Protecție UV', 'Păstrează valoarea la revânzare', 'Garanție de 5 ani disponibilă'] },
         { title: 'Folie Colorată Vinil', desc: 'Transformă-ți mașina cu folii vinil premium. Peste 300 de culori, texturi și finisaje. Complet reversibilă — revine la vopseaua originală.', features: ['300+ culori și finisaje', 'Complet reversibilă', 'Protejează vopseaua originală', 'Design-uri personalizate'] },
         { title: 'Tratament Ceramic', desc: 'Tratament nano-ceramic profesional care se leagă permanent de vopsea. Creează un scut hidrofob cu luciu extrem și rezistență chimică.', features: ['Duritate 9H', 'Suprafață hidrofobă', 'Finisaj extrem de lucios', 'Protecție 5 ani'] },
         { title: 'Folie pentru Geamuri', desc: 'Instalare profesională de folie pentru geamuri pentru protecție UV superioară, reducerea căldurii, intimitate sporită și un aspect rafinat.', features: ['Respinge 99% UV', 'Reducerea căldurii', 'Intimitate sporită', 'Conformitate legală garantată'] },
@@ -206,7 +206,7 @@ export const translations = {
       story: 'Povestea Noastră →',
       features: [
         { title: 'Tehnologie Auto-regenerantă', desc: 'Foliile noastre PPF folosesc poliuretan termoplastic care vindecă zgârieturile ușoare la căldură — vopseaua rămâne impecabilă.' },
-        { title: 'Garanție de 10 Ani Disponibilă', desc: 'Ne susținem munca. Foliile selectate vin cu un deceniu de garanție a producătorului împotriva îngălbenirii, crăpării și delaminării.' },
+        { title: 'Garanție de 5 Ani Disponibilă', desc: 'Ne susținem munca. Foliile selectate vin cu un deceniu de garanție a producătorului împotriva îngălbenirii, crăpării și delaminării.' },
         { title: 'Instalatori Certificați', desc: 'Echipa noastră este instruită și certificată de cei mai mari producători de folii din lume, inclusiv XPEL, Avery Dennison și Hexis.' },
         { title: 'Studio Climatizat', desc: 'Instalarea foliei necesită un mediu fără praf, cu temperatură controlată. Studioul nostru este construit la standarde profesionale.' },
         { title: '15+ Branduri Premium de Folie', desc: 'Colaborăm direct cu producători de top pentru a avea cel mai vast catalog de folii din Moldova — inclusiv finisaje rare și speciale.' },
@@ -271,7 +271,7 @@ export const translations = {
       subtitle: 'Премиальная установка защитной плёнки и виниловой оклейки. Невидимая броня для вашего автомобиля — созданная на годы.',
       exploreFilms: 'Смотреть Плёнки',
       bookConsultation: 'Записаться на Консультацию',
-      badges: ['500+ Защищённых Авто', 'Самовосстанавливающаяся плёнка', 'Гарантия 10 лет'],
+      badges: ['500+ Защищённых Авто', 'Самовосстанавливающаяся плёнка', 'Гарантия 5 лет'],
       scroll: 'Листайте',
     },
     stats: {
@@ -286,7 +286,7 @@ export const translations = {
       ctaText: 'Не уверены, какая услуга вам подходит?',
       ctaButton: 'Поговорить с Экспертом',
       items: [
-        { title: 'Защитная Плёнка (PPF)', desc: 'Самовосстанавливающаяся, оптически прозрачная плёнка, защищающая от сколов, царапин, ультрафиолета и химии. Доступна в матовом и глянцевом исполнении.', features: ['Самовосстановление', 'Защита от UV', 'Сохраняет стоимость', 'Гарантия до 10 лет'] },
+        { title: 'Защитная Плёнка (PPF)', desc: 'Самовосстанавливающаяся, оптически прозрачная плёнка, защищающая от сколов, царапин, ультрафиолета и химии. Доступна в матовом и глянцевом исполнении.', features: ['Самовосстановление', 'Защита от UV', 'Сохраняет стоимость', 'Гарантия до 5 лет'] },
         { title: 'Виниловая Оклейка', desc: 'Преобразите автомобиль премиальным винилом. Более 300 цветов, текстур и финишей. Полностью обратимо — возврат к заводской краске.', features: ['300+ цветов и финишей', 'Полностью обратимо', 'Защита заводской краски', 'Индивидуальный дизайн'] },
         { title: 'Керамическое Покрытие', desc: 'Профессиональное нано-керамическое покрытие, навсегда связывающееся с краской. Создаёт гидрофобный щит с экстремальным блеском и химстойкостью.', features: ['Твёрдость 9H', 'Гидрофобная поверхность', 'Экстремальный блеск', 'Защита 5 лет'] },
         { title: 'Тонировка Стёкол', desc: 'Профессиональная установка плёнки для стёкол: превосходная защита от UV, снижение жары, приватность и стильный вид.', features: ['99% защита от UV', 'Снижение жары', 'Больше приватности', 'Соответствие закону'] },
@@ -335,7 +335,7 @@ export const translations = {
       story: 'Наша История →',
       features: [
         { title: 'Самовосстановление', desc: 'Наши плёнки PPF из термопластичного полиуретана затягивают лёгкие царапины под действием тепла — краска остаётся идеальной.' },
-        { title: 'Гарантия до 10 Лет', desc: 'Мы отвечаем за работу. Отдельные плёнки идут с гарантией производителя на десятилетие от пожелтения, трещин и расслоения.' },
+        { title: 'Гарантия до 5 Лет', desc: 'Мы отвечаем за работу. Отдельные плёнки идут с гарантией производителя на десятилетие от пожелтения, трещин и расслоения.' },
         { title: 'Сертифицированные Мастера', desc: 'Наша команда обучена и сертифицирована ведущими мировыми производителями плёнок, включая XPEL, Avery Dennison и Hexis.' },
         { title: 'Климат-контролируемая Студия', desc: 'Установка плёнки требует чистого помещения без пыли с контролем температуры. Наша студия построена по профессиональным стандартам.' },
         { title: '15+ Премиум Брендов Плёнки', desc: 'Мы работаем напрямую с топовыми производителями и держим самый широкий каталог плёнок в Молдове — включая редкие финиши.' },
