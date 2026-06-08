@@ -1,5 +1,5 @@
 // src/data/films.js
-// HOHOFILM Color TPU PPF catalog. Solid colours are offered in Gloss / Matte /
+//  Color TPU PPF catalog. Solid colours are offered in Gloss / Matte /
 // Satin finishes; metallic & colour-shift films get their own categories.
 // Each film's `finish` drives the 3D material (see CarViewer FINISH map).
 
@@ -35,7 +35,7 @@ const buildFinish = (finish) =>
       id: slug(name),
       name,
       hex,
-      brand: 'HOHOFILM',
+      brand: '',
       code,
       finish,
       description: `${base} · ${finishDesc[finish]}`,
@@ -69,7 +69,7 @@ const mk = (finish, desc) => ([name, hex, code]) => ({
   id: slug(name),
   name,
   hex,
-  brand: 'HOHOFILM',
+  brand: '',
   code,
   finish,
   description: `${code} · ${desc}`,
