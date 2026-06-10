@@ -414,6 +414,10 @@ select option { background: #141414; color: #fff; }
   .features-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 @media (max-width: 640px) {
+  /* Keep two columns on phones so the 6 cards don't create a huge column */
+  .features-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 380px) {
   .features-grid { grid-template-columns: 1fr !important; }
 }
 
@@ -447,4 +451,58 @@ select option { background: #141414; color: #fff; }
   /* Viewer overlay chips sit closer to the edges on small screens */
   .viewer-chip-tl { top: 14px !important; left: 14px !important; }
   .viewer-chip-tr { top: 14px !important; right: 14px !important; }
+
+  /* ── Shorter page: tighter vertical rhythm (much less scrolling) ── */
+  section:not(#home) { padding-top: 56px !important; padding-bottom: 56px !important; }
+  .sec-head { margin-bottom: 32px !important; }
+  .whyus-header { margin-bottom: 32px !important; gap: 24px !important; }
+  .testimonials-header { margin-bottom: 28px !important; }
+  .services-grid > div { padding: 30px 22px !important; }
+  .features-grid > div { padding: 22px 18px !important; }
+  .process-mobile > div { padding-bottom: 28px !important; }
+
+  /* Smaller display headings → shorter sections & fewer line wraps */
+  main h2 { font-size: clamp(33px, 8.5vw, 48px) !important; }
+
+  /* Contact: shorter map + tighter info stack */
+  .contact-layout { gap: 28px !important; }
+  .contact-info { gap: 18px !important; }
+  .contact-map { height: 175px !important; }
+
+  /* Card-heavy sections → swipeable carousels. Collapses a tall vertical stack
+     into a single card-height row; all content is kept (swipe horizontally). */
+  .services-grid, .features-grid, .gallery-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    gap: 14px !important;
+    background: transparent !important;
+    padding: 2px 20px 16px !important;
+    margin: 0 -20px !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .services-grid::-webkit-scrollbar,
+  .features-grid::-webkit-scrollbar,
+  .gallery-grid::-webkit-scrollbar { display: none; }
+  .services-grid > div,
+  .features-grid > div,
+  .gallery-grid > div {
+    flex: 0 0 85% !important;
+    scroll-snap-align: center;
+    min-width: 0 !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: 12px !important;
+    background: var(--color-bg-card) !important;
+  }
+
+  /* Gallery: shorter before/after panels */
+  .ba-slider { height: 230px !important; }
+
+  /* Footer: smaller + Navigation and Contact share one row */
+  footer { padding: 44px 20px 24px !important; }
+  .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 26px 20px !important; margin-bottom: 32px !important; }
+  .footer-grid > div:first-child { grid-column: 1 / -1; }
 }

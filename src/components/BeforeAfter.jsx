@@ -25,7 +25,7 @@ export default function BeforeAfter() {
   return (
     <section id="gallery" ref={ref} style={{ padding: '120px 48px', background: 'var(--color-bg-secondary)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <div style={{ marginBottom: '72px' }}>
+        <div className="sec-head" style={{ marginBottom: '72px' }}>
           <div className="section-label">{t('gallery.label')}</div>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(48px, 7vw, 96px)', color: 'var(--c-text)', lineHeight: 0.95 }}>
             {t('gallery.titleLine1')}
@@ -39,6 +39,8 @@ export default function BeforeAfter() {
           {transformations.map((item, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i * 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }} style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
               <ReactCompareSlider
+                className="ba-slider"
+                onlyHandleDraggable
                 itemOne={<PlaceholderImage label={t('gallery.before')} variant="before" note={t('gallery.replaceNote')} />}
                 itemTwo={<PlaceholderImage label={t('gallery.after')} variant="after" note={t('gallery.replaceNote')} />}
                 style={{ height: '340px' }}

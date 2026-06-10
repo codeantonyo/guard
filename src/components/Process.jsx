@@ -13,7 +13,7 @@ export default function Process() {
   return (
     <section id="process" ref={ref} style={{ padding: '120px 48px', background: 'var(--color-bg-primary)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <div style={{ marginBottom: '80px' }}>
+        <div className="sec-head" style={{ marginBottom: '80px' }}>
           <div className="section-label">{t('process.label')}</div>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(48px, 7vw, 96px)', color: 'var(--c-text)', lineHeight: 0.95 }}>{t('process.title')}</h2>
         </div>

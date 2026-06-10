@@ -172,9 +172,9 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile controls */}
+        {/* Mobile controls — language is the more-used control, so it lives here */}
         <div style={{ display: 'none', alignItems: 'center', gap: '10px' }} className="hamburger-btn">
-          <ThemeToggle />
+          <LangSwitcher />
           <button onClick={() => setMenuOpen(!menuOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }} aria-label="Toggle menu">
             <div style={{ width: '24px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
               <motion.span animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 7 : 0 }} style={{ display: 'block', height: '2px', background: 'var(--c-text)', borderRadius: '1px' }} />
@@ -208,7 +208,7 @@ export default function Navbar() {
               </motion.a>
             ))}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.36 }}>
-              <LangSwitcher compact />
+              <ThemeToggle />
             </motion.div>
             <motion.button initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.44 }} className="btn-primary" onClick={() => scrollTo('#contact')}>
               {t('nav.getQuote')}

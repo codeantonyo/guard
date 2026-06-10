@@ -75,7 +75,7 @@ export default function Contact() {
     <section id="contact" ref={ref} style={{ padding: '120px 48px', background: 'var(--color-bg-secondary)' }}>
       <Toaster position="top-right" toastOptions={{ style: { background: 'var(--color-bg-elevated)', color: 'var(--c-text)', border: '1px solid rgba(29,185,84,0.3)' } }} />
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <div style={{ marginBottom: '72px' }}>
+        <div className="sec-head" style={{ marginBottom: '72px' }}>
           <div className="section-label">{t('contact.label')}</div>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(48px, 7vw, 96px)', color: 'var(--c-text)', lineHeight: 0.95 }}>
             {t('contact.titleLine1')}
@@ -130,7 +130,7 @@ export default function Contact() {
           </div>
 
           {/* INFO */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+          <div className="contact-info" style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
             <div style={{ padding: '32px', background: 'var(--color-bg-card)', borderRadius: '8px', border: '1px solid var(--color-border)' }}>
               <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '18px', fontWeight: 700, color: 'var(--c-text)', marginBottom: '24px' }}>{t('contact.detailsTitle')}</h3>
               {details.map((item) => {
@@ -166,7 +166,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--color-border)', height: '240px', background: 'var(--color-bg-card)' }}>
+            <div className="contact-map" style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--color-border)', height: '240px', background: 'var(--color-bg-card)' }}>
               <iframe title="Guard Film — studio location, Chișinău" src={MAPS_EMBED_SRC} width="100%" height="100%" style={{ border: 0, display: 'block', filter: 'contrast(1.05) brightness(0.92)' }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
             </div>
           </div>
