@@ -12,6 +12,11 @@ const CODES = SUPPORTED_LOCALES.map((l) => l.code)
 const LocaleContext = createContext({ locale: 'en', setLocale: () => {}, t: (k) => k })
 
 function detectLocale() {
+  // 1) explicit ?lang= (used by hreflang / sitemap URLs), 2) saved cookie, 3) browser
+  if (typeof window !== 'undefined') {
+    const param = new URLSearchParams(window.location.search).get('lang')
+    if (CODES.includes(param)) return param
+  }
   const saved = getCookie('gf_lang')
   if (CODES.includes(saved)) return saved
   if (typeof navigator !== 'undefined') {

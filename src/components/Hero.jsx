@@ -79,18 +79,22 @@ export default function Hero() {
           {t('hero.badge')}
         </motion.div>
 
-        <div style={{ overflow: 'hidden' }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0 20px' }}>
-            {(Array.isArray(words) ? words : []).map((word, i) => {
-              const isLast = i === words.length - 1
-              return (
-                <motion.span key={`${word}-${i}`} custom={i} variants={wordVariants} initial="hidden" animate="visible" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(46px, 13vw, 140px)', lineHeight: 0.95, letterSpacing: '0.02em', color: 'var(--c-text)', display: 'block' }}>
-                  {isLast ? <span style={{ color: 'transparent', WebkitTextStroke: '1px rgba(29,185,84,0.8)' }}>{word}</span> : word}
-                </motion.span>
-              )
-            })}
-          </div>
-        </div>
+        <h1 style={{ margin: 0, padding: 0 }}>
+          {/* Keyword-rich, screen-reader/SEO heading; the animated headline below is decorative */}
+          <span className="sr-only">{t('hero.srTitle')}</span>
+          <span aria-hidden="true" style={{ overflow: 'hidden', display: 'block' }}>
+            <span style={{ display: 'flex', flexWrap: 'wrap', gap: '0 20px' }}>
+              {(Array.isArray(words) ? words : []).map((word, i) => {
+                const isLast = i === words.length - 1
+                return (
+                  <motion.span key={`${word}-${i}`} custom={i} variants={wordVariants} initial="hidden" animate="visible" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(46px, 13vw, 140px)', lineHeight: 0.95, letterSpacing: '0.02em', color: 'var(--c-text)', display: 'block' }}>
+                    {isLast ? <span style={{ color: 'transparent', WebkitTextStroke: '1px rgba(29,185,84,0.8)' }}>{word}</span> : word}
+                  </motion.span>
+                )
+              })}
+            </span>
+          </span>
+        </h1>
 
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }} style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(16px, 2vw, 20px)', fontWeight: 300, color: 'var(--c-text-2)', maxWidth: '540px', marginTop: '24px', lineHeight: 1.7 }}>
           {t('hero.subtitle')}

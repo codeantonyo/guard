@@ -7,7 +7,6 @@ import { useLocale, SUPPORTED_LOCALES } from '../i18n/LocaleProvider'
 const navItems = [
   { key: 'services', href: '#services' },
   { key: 'films', href: '#films' },
-  { key: 'gallery', href: '#gallery' },
   { key: 'process', href: '#process' },
   { key: 'contact', href: '#contact' },
 ]

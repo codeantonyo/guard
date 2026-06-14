@@ -2,12 +2,12 @@ import { useEffect } from 'react'
 import Lenis from '@studio-freight/lenis'
 import { ThemeProvider } from './theme/ThemeProvider'
 import { LocaleProvider } from './i18n/LocaleProvider'
+import Seo from './components/Seo'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Stats from './components/Stats'
 import Services from './components/Services'
 import FilmPicker from './components/FilmPicker'
-import BeforeAfter from './components/BeforeAfter'
 import Process from './components/Process'
 import WhyUs from './components/WhyUs'
 import FilmStructure from './components/FilmStructure'
@@ -80,6 +80,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <LocaleProvider>
+        <Seo />
         {/* Scroll progress bar */}
         <div id="scroll-progress" style={{ position: 'fixed', top: 0, left: 0, height: '2px', width: '0%', background: 'linear-gradient(90deg, #1DB954, #39e07a)', zIndex: 9999, transition: 'width 0.1s linear' }} />
 
@@ -93,7 +94,6 @@ export default function App() {
           <Stats />
           <Services />
           <FilmPicker />
-          <BeforeAfter />
           <Process />
           <WhyUs />
           <FilmStructure />

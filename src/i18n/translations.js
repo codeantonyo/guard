@@ -5,6 +5,11 @@ export const translations = {
   // ─────────────────────────────── ENGLISH ───────────────────────────────
   en: {
     brand: { tagline: 'Make a Difference' },
+    seo: {
+      title: 'Guard Film — Paint Protection Film (PPF) & Car Wraps in Chișinău, Moldova',
+      description: 'Premium Paint Protection Film (PPF), vinyl car wraps, ceramic coating, window tinting & car detailing in Chișinău, Moldova. Self-healing film, 5-year warranty, free consultation. Serving Moldova & Romania.',
+      keywords: 'PPF Moldova, paint protection film Chisinau, car wrap Moldova, car wrap Chisinau, ceramic coating Chisinau, window tinting Chisinau, car detailing Chisinau, PPF Romania, car wrap Romania, Guard Film',
+    },
     nav: { services: 'Services', films: 'Films', gallery: 'Gallery', process: 'Process', contact: 'Contact', getQuote: 'Get a Quote' },
     theme: { light: 'Switch to light mode', dark: 'Switch to dark mode' },
     hero: {
@@ -15,6 +20,7 @@ export const translations = {
       bookConsultation: 'Book a Consultation',
       badges: ['500+ Cars Protected', 'Self-Healing Film', '5-Year Warranty'],
       scroll: 'Scroll',
+      srTitle: 'Guard Film — Paint Protection Film (PPF), car wraps, ceramic coating and window tinting in Chișinău, Moldova',
     },
     stats: {
       labels: ['Cars Protected', 'Years Experience', 'Film Brands', 'Satisfaction Rate'],
@@ -65,7 +71,7 @@ export const translations = {
       steps: [
         { title: 'Free Consultation', desc: 'Tell us about your car and goals. We assess the vehicle, recommend the best films, and provide a transparent no-obligation quote.', duration: '30 min' },
         { title: 'Surface Preparation', desc: 'Complete paint decontamination, clay bar treatment, and paint correction if needed. The surface must be perfect before any film goes on.', duration: '2–4 hrs' },
-        { title: 'Film Installation', desc: 'Precision film cutting and application in our climate-controlled studio. We use custom patterns for a factory-fitted finish with no edge lifting.', duration: '1–3 days' },
+        { title: 'Film Installation', desc: 'Precision film cutting and application in our climate-controlled studio. We use custom patterns for a factory-fitted finish with no edge lifting.', duration: '5–7 days' },
         { title: 'Quality Inspection', desc: 'Every panel is inspected under controlled lighting. We only hand back your car when it meets our exacting standards — and not a moment before.', duration: '1–2 hrs' },
       ],
     },
@@ -77,10 +83,10 @@ export const translations = {
       story: 'Our Story →',
       features: [
         { title: 'Self-Healing Technology', desc: 'Our PPF films use thermoplastic polyurethane that heals light scratches with heat exposure — your paint stays flawless.' },
-        { title: '5-Year Warranty Available', desc: 'We stand behind our work. Selected films come with a decade of manufacturer warranty against yellowing, cracking, and delamination.' },
-        { title: 'Certified Installers', desc: "Our team is trained and certified by the world's leading film manufacturers including XPEL, Avery Dennison, and Hexis." },
+        { title: '5-Year Warranty Available', desc: 'Selected films come with a 5-year manufacturer warranty against yellowing, cracking, and delamination.' },
+        { title: 'Certified Installers', desc: "Our team is trained and certified by the world's leading film manufacturers." },
         { title: 'Climate-Controlled Studio', desc: 'Film installation requires a dust-free, temperature-regulated environment. Our studio is built to professional standards.' },
-        { title: '15+ Premium Film Brands', desc: 'We partner directly with top manufacturers to stock the widest film catalog in Moldova — including rare and specialty finishes.' },
+        { title: 'PPF Color', desc: 'We have the widest catalog of color PPF films in Moldova.' },
         { title: 'Custom Pattern Cutting', desc: "Every car is different. We use proprietary software to precision-cut patterns specific to your vehicle's exact panel geometry." },
       ],
     },
@@ -119,7 +125,7 @@ export const translations = {
       toast: "Message sent! We'll contact you within 24 hours.",
       detailsTitle: 'Contact Details',
       phoneLabel: 'Phone', emailLabel: 'Email', addressLabel: 'Address', hoursLabel: 'Hours',
-      hoursValue: 'Monday – Saturday: 9:00 – 18:00',
+      hoursValue: 'Monday – Friday: 09:00 – 17:00',
       followTitle: 'Follow Our Work',
     },
     footer: {
@@ -134,6 +140,11 @@ export const translations = {
   // ─────────────────────────────── ROMÂNĂ ───────────────────────────────
   ro: {
     brand: { tagline: 'Fă o Diferență' },
+    seo: {
+      title: 'Guard Film — Folie de Protecție (PPF) & Car Wrap în Chișinău, Moldova',
+      description: 'PPF premium, folii auto colorate (car wrap), tratament ceramic, tonare geamuri și detailing auto în Chișinău, Moldova. Folie auto-regenerantă, garanție 5 ani, consultație gratuită. Servim Moldova și România.',
+      keywords: 'PPF Moldova, folie protectie auto Chisinau, car wrap Moldova, folie auto colorata, tratament ceramic Chisinau, tonare geamuri Chisinau, detailing auto Chisinau, PPF Romania, folie auto Romania, Guard Film',
+    },
     nav: { services: 'Servicii', films: 'Folii', gallery: 'Galerie', process: 'Proces', contact: 'Contact', getQuote: 'Cere o Ofertă' },
     theme: { light: 'Comută la modul luminos', dark: 'Comută la modul întunecat' },
     hero: {
@@ -144,6 +155,7 @@ export const translations = {
       bookConsultation: 'Programează o Consultație',
       badges: ['500+ Mașini Protejate', 'Folie Auto-regenerantă', 'Garanție 5 Ani'],
       scroll: 'Derulează',
+      srTitle: 'Guard Film — Folie de protecție PPF, car wrap, tratament ceramic și tonare geamuri în Chișinău, Moldova',
     },
     stats: {
       labels: ['Mașini Protejate', 'Ani de Experiență', 'Branduri de Folie', 'Rată de Satisfacție'],
@@ -194,7 +206,7 @@ export const translations = {
       steps: [
         { title: 'Consultație Gratuită', desc: 'Spune-ne despre mașina și obiectivele tale. Evaluăm vehiculul, recomandăm cele mai bune folii și oferim o ofertă transparentă, fără obligații.', duration: '30 min' },
         { title: 'Pregătirea Suprafeței', desc: 'Decontaminare completă a vopselei, tratament cu clay bar și corecție a vopselei dacă e necesar. Suprafața trebuie să fie perfectă înainte de aplicare.', duration: '2–4 ore' },
-        { title: 'Instalarea Foliei', desc: 'Tăiere și aplicare de precizie în studioul nostru climatizat. Folosim tipare personalizate pentru un finisaj ca din fabrică, fără desprinderea marginilor.', duration: '1–3 zile' },
+        { title: 'Instalarea Foliei', desc: 'Tăiere și aplicare de precizie în studioul nostru climatizat. Folosim tipare personalizate pentru un finisaj ca din fabrică, fără desprinderea marginilor.', duration: '5–7 zile' },
         { title: 'Inspecția Calității', desc: 'Fiecare panou este inspectat sub lumină controlată. Înapoiem mașina doar când atinge standardele noastre exigente — nicio clipă mai devreme.', duration: '1–2 ore' },
       ],
     },
@@ -206,10 +218,10 @@ export const translations = {
       story: 'Povestea Noastră →',
       features: [
         { title: 'Tehnologie Auto-regenerantă', desc: 'Foliile noastre PPF folosesc poliuretan termoplastic care vindecă zgârieturile ușoare la căldură — vopseaua rămâne impecabilă.' },
-        { title: 'Garanție de 5 Ani Disponibilă', desc: 'Ne susținem munca. Foliile selectate vin cu un deceniu de garanție a producătorului împotriva îngălbenirii, crăpării și delaminării.' },
-        { title: 'Instalatori Certificați', desc: 'Echipa noastră este instruită și certificată de cei mai mari producători de folii din lume, inclusiv XPEL, Avery Dennison și Hexis.' },
+        { title: 'Garanție de 5 Ani Disponibilă', desc: 'Foliile selectate vin cu o garanție de 5 ani a producătorului împotriva îngălbenirii, crăpării și delaminării.' },
+        { title: 'Instalatori Certificați', desc: 'Echipa noastră este instruită și certificată de cei mai mari producători de folii din lume.' },
         { title: 'Studio Climatizat', desc: 'Instalarea foliei necesită un mediu fără praf, cu temperatură controlată. Studioul nostru este construit la standarde profesionale.' },
-        { title: '15+ Branduri Premium de Folie', desc: 'Colaborăm direct cu producători de top pentru a avea cel mai vast catalog de folii din Moldova — inclusiv finisaje rare și speciale.' },
+        { title: 'PPF Color', desc: 'Avem cel mai vast catalog de folii PPF color din Moldova.' },
         { title: 'Tăiere Personalizată a Tiparelor', desc: 'Fiecare mașină e diferită. Folosim software propriu pentru a tăia tipare exacte pentru geometria panourilor vehiculului tău.' },
       ],
     },
@@ -248,7 +260,7 @@ export const translations = {
       toast: 'Mesaj trimis! Te contactăm în 24 de ore.',
       detailsTitle: 'Detalii de Contact',
       phoneLabel: 'Telefon', emailLabel: 'Email', addressLabel: 'Adresă', hoursLabel: 'Program',
-      hoursValue: 'Luni – Sâmbătă: 9:00 – 18:00',
+      hoursValue: 'Luni – Vineri: 09:00 – 17:00',
       followTitle: 'Urmărește-ne Munca',
     },
     footer: {
@@ -263,6 +275,11 @@ export const translations = {
   // ─────────────────────────────── РУССКИЙ ───────────────────────────────
   ru: {
     brand: { tagline: 'Почувствуй Разницу' },
+    seo: {
+      title: 'Guard Film — Защитная плёнка (PPF) и оклейка авто в Кишинёве, Молдова',
+      description: 'Премиальная защитная плёнка PPF, оклейка авто винилом, керамическое покрытие, тонировка и детейлинг в Кишинёве, Молдова. Самовосстанавливающаяся плёнка, гарантия 5 лет, бесплатная консультация. Молдова и Румыния.',
+      keywords: 'PPF Молдова, защитная плёнка Кишинёв, оклейка авто Молдова, антигравийная плёнка, керамика авто Кишинёв, тонировка Кишинёв, детейлинг Молдова, PPF Румыния, Guard Film',
+    },
     nav: { services: 'Услуги', films: 'Плёнки', gallery: 'Галерея', process: 'Процесс', contact: 'Контакты', getQuote: 'Получить расчёт' },
     theme: { light: 'Переключить на светлую тему', dark: 'Переключить на тёмную тему' },
     hero: {
@@ -273,6 +290,7 @@ export const translations = {
       bookConsultation: 'Записаться на Консультацию',
       badges: ['500+ Защищённых Авто', 'Самовосстанавливающаяся плёнка', 'Гарантия 5 лет'],
       scroll: 'Листайте',
+      srTitle: 'Guard Film — Защитная плёнка PPF, оклейка авто, керамика и тонировка в Кишинёве, Молдова',
     },
     stats: {
       labels: ['Защищённых Авто', 'Лет Опыта', 'Брендов Плёнки', 'Уровень Довольства'],
@@ -323,7 +341,7 @@ export const translations = {
       steps: [
         { title: 'Бесплатная Консультация', desc: 'Расскажите об авто и целях. Мы осмотрим машину, подберём лучшие плёнки и дадим прозрачный расчёт без обязательств.', duration: '30 мин' },
         { title: 'Подготовка Поверхности', desc: 'Полная очистка краски, обработка глиной и при необходимости полировка. Поверхность должна быть идеальной перед оклейкой.', duration: '2–4 ч' },
-        { title: 'Установка Плёнки', desc: 'Точная резка и нанесение в нашей климат-контролируемой студии. Используем индивидуальные лекала для заводского вида без отслоений.', duration: '1–3 дня' },
+        { title: 'Установка Плёнки', desc: 'Точная резка и нанесение в нашей климат-контролируемой студии. Используем индивидуальные лекала для заводского вида без отслоений.', duration: '5–7 дней' },
         { title: 'Контроль Качества', desc: 'Каждая панель проверяется при контролируемом освещении. Мы отдаём авто только когда оно соответствует нашим высоким стандартам.', duration: '1–2 ч' },
       ],
     },
@@ -335,10 +353,10 @@ export const translations = {
       story: 'Наша История →',
       features: [
         { title: 'Самовосстановление', desc: 'Наши плёнки PPF из термопластичного полиуретана затягивают лёгкие царапины под действием тепла — краска остаётся идеальной.' },
-        { title: 'Гарантия до 5 Лет', desc: 'Мы отвечаем за работу. Отдельные плёнки идут с гарантией производителя на десятилетие от пожелтения, трещин и расслоения.' },
-        { title: 'Сертифицированные Мастера', desc: 'Наша команда обучена и сертифицирована ведущими мировыми производителями плёнок, включая XPEL, Avery Dennison и Hexis.' },
+        { title: 'Гарантия до 5 Лет', desc: 'Отдельные плёнки идут с гарантией производителя на 5 лет от пожелтения, трещин и расслоения.' },
+        { title: 'Сертифицированные Мастера', desc: 'Наша команда обучена и сертифицирована ведущими мировыми производителями плёнок.' },
         { title: 'Климат-контролируемая Студия', desc: 'Установка плёнки требует чистого помещения без пыли с контролем температуры. Наша студия построена по профессиональным стандартам.' },
-        { title: '15+ Премиум Брендов Плёнки', desc: 'Мы работаем напрямую с топовыми производителями и держим самый широкий каталог плёнок в Молдове — включая редкие финиши.' },
+        { title: 'PPF Color', desc: 'У нас самый широкий каталог цветных плёнок PPF в Молдове.' },
         { title: 'Индивидуальная Резка Лекал', desc: 'Каждое авто уникально. Мы используем собственное ПО для точной резки лекал под геометрию панелей вашего автомобиля.' },
       ],
     },
@@ -377,7 +395,7 @@ export const translations = {
       toast: 'Сообщение отправлено! Мы свяжемся в течение 24 часов.',
       detailsTitle: 'Контактные Данные',
       phoneLabel: 'Телефон', emailLabel: 'Email', addressLabel: 'Адрес', hoursLabel: 'Часы работы',
-      hoursValue: 'Понедельник – Суббота: 9:00 – 18:00',
+      hoursValue: 'Понедельник – Пятница: 09:00 – 17:00',
       followTitle: 'Следите за Нашей Работой',
     },
     footer: {

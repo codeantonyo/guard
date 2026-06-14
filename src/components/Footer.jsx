@@ -1,6 +1,6 @@
 import { useLocale } from '../i18n/LocaleProvider'
 
-const navKeys = ['services', 'films', 'gallery', 'process', 'contact']
+const navKeys = ['services', 'films', 'process', 'contact']
 
 function ShieldLogo() {
   return (
