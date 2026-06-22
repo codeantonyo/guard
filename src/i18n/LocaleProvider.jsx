@@ -12,18 +12,21 @@ const CODES = SUPPORTED_LOCALES.map((l) => l.code)
 const LocaleContext = createContext({ locale: 'en', setLocale: () => {}, t: (k) => k })
 
 function detectLocale() {
-  // 1) explicit ?lang= (used by hreflang / sitemap URLs), 2) saved cookie, 3) browser
+  // 1) explicit ?lang= (hreflang / sitemap URLs)
   if (typeof window !== 'undefined') {
     const param = new URLSearchParams(window.location.search).get('lang')
     if (CODES.includes(param)) return param
   }
+  // 2) returning visitor's saved choice
   const saved = getCookie('gf_lang')
   if (CODES.includes(saved)) return saved
+  // 3) Moldova default = Romanian. Russian-language browsers get Russian (Moldova's
+  //    other main language); everyone else (incl. English/unknown) opens in Romanian.
   if (typeof navigator !== 'undefined') {
-    const browser = (navigator.language || 'en').slice(0, 2).toLowerCase()
-    if (CODES.includes(browser)) return browser
+    const browser = (navigator.language || '').slice(0, 2).toLowerCase()
+    if (browser === 'ru') return 'ru'
   }
-  return 'en'
+  return 'ro'
 }
 
 function resolve(obj, key) {
