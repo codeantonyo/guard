@@ -18,12 +18,20 @@ export const cars = [
     paint: { by: 'material', match: 'paint' },
   },
   {
+    id: 'bmw-m5',
+    name: 'BMW M5',
+    short: 'M5',
+    file: '/car-model/bmw-m5.glb',
+    paint: { by: 'material', match: 'paint' },
+  },
+  {
     id: 'mercedes-s63',
     name: 'Mercedes S63',
     short: 'S63',
     file: '/car-model/mercedes-s63.glb',
     paint: { by: 'material', match: 'paint' },
   },
+
 ]
 
 export const defaultCar = cars[0]
