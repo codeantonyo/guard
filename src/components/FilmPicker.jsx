@@ -5,6 +5,7 @@ import { Pause, Play } from 'lucide-react'
 import { filmCategories, defaultFilm } from '../data/films'
 import { cars, defaultCar } from '../data/cars'
 import { useLocale } from '../i18n/LocaleProvider'
+import CatalogViewer from './CatalogViewer'
 
 const CarViewer = lazy(() => import('./CarViewer'))
 let prefetchCar = () => {}
@@ -210,6 +211,10 @@ export default function FilmPicker() {
             {t('films.hint')}
           </p>
         </div>
+      </div>
+
+      <div className="catalog-band">
+        <CatalogViewer />
       </div>
     </section>
   )
